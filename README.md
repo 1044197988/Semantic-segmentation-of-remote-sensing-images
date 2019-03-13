@@ -1,1 +1,1 @@
-# -Semantic-segmentation-of-remote-sensing-image
+# Semantic-segmentation-of-remote-sensing-image

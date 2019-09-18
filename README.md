@@ -51,3 +51,7 @@ Unet等相关模型预测的图，“拼接痕迹”很小。
 这个Segnet、FCN8S是用序列式类来实现的模型，所以预测的话是跟Model类有一点不相同，就是可以调用predict_classes的方法。<br>
 Model类文件里提供了使用Model类的模型的预测方法。<br>
 以上所有代码只是提供参考,训练其他数据的话很多参数需要自己修改，甚至生成器也需要更改，如果想对数据类别进行加权或使用样本权重，主要记得在生成器中做修改就可以了。
+
+# 提示
+我的该贡献库中，提供了一些分割的模型代码
+[1044197988-TF.Keras-Commonly-used-models](https://github.com/1044197988/TF.Keras-Commonly-used-models)

@@ -39,8 +39,7 @@
 当中1，2，3，4，5，15分别代表预测后的像素值，每个像素值代表一类
 ![1](https://github.com/1044197988/Semantic-segmentation-of-remote-sensing-images/blob/master/Unet%2B%2B结果/分类报告.png)
 ![2](https://github.com/1044197988/Semantic-segmentation-of-remote-sensing-images/blob/master/Unet%2B%2B结果/整体统计.png)
-![3](https://github.com/1044197988/Semantic-segmentation-of-remote-sensing-images/blob/master/Unet%2B%2B结果/概要统计.png)
-![4](https://github.com/1044197988/Semantic-segmentation-of-remote-sensing-images/blob/master/Unet%2B%2B结果/类别统计.png)
+![3](https://github.com/1044197988/Semantic-segmentation-of-remote-sensing-images/blob/master/Unet%2B%2B结果/类别统计.png)
 
 ## 结果图的拼接痕迹问题：
 我认为这个很大概率上跟模型的拟合能力、泛化能力有关，所以这个问题不用考虑，只要能够训练到所有的像素就可以了。

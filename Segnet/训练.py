@@ -17,18 +17,6 @@ import random
 import os
 from tqdm import tqdm
 
- #filepath ='C:\\Users\Administrator\Desktop\Project\src\\'
-
-#import tensorflow.keras.backend.tensorflow_backend as KTF
-
-#进行配置，使用80%的GPU
-config = tf.ConfigProto()
-config.gpu_options.per_process_gpu_memory_fraction = 0.8
-session = tf.Session(config=config)
-
-# 设置session
-tf.keras.backend.set_session(session)
-
 #设置使用GPU
 os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 seed = 7  
@@ -91,25 +79,22 @@ def generateData(batch_size,data=[]):
             train_data.append(img)  
             label = load_img(filepath + 'label/' + url, grayscale=True)
             label = img_to_array(label).reshape((img_w * img_h,))  
-            # print label.shape  
             train_label.append(label)  
             if batch % batch_size==0: 
-                #转为数组
                 train_data = np.array(train_data)  
                 train_label = np.array(train_label).flatten()      #拍平
                 train_label = labelencoder.transform(train_label)  
                 train_label = to_categorical(train_label, num_classes=n_label)  #编码输出便签
                 train_label = train_label.reshape((batch_size,img_w * img_h,n_label))
-                #print("1:"+str(train_label.shape))
                 yield (train_data,train_label)  
                 train_data = []  
                 train_label = []  
                 batch = 0  
-                #print("2:"+str(len(train_label)))
-                
-# data for validation
 
-#生成有效的数据
+                
+
+
+#生成测试的数据
 def generateValidData(batch_size,data=[]):
     while True:  
         valid_data = []  
@@ -123,7 +108,6 @@ def generateValidData(batch_size,data=[]):
             valid_data.append(img)  
             label = load_img(filepath + 'label/' + url, grayscale=True)
             label = img_to_array(label).reshape((img_w * img_h,))  
-            #print(label.shape)  
             valid_label.append(label)  
             if batch % batch_size==0:  
                 valid_data = np.array(valid_data)  
@@ -131,12 +115,11 @@ def generateValidData(batch_size,data=[]):
                 valid_label = labelencoder.transform(valid_label)  
                 valid_label = to_categorical(valid_label, num_classes=n_label)
                 valid_label = valid_label.reshape((batch_size,img_w * img_h,n_label))
-                #print("3:"+str(valid_label.shape))
                 yield (valid_data,valid_label)  
                 valid_data = []  
                 valid_label = []  
                 batch = 0
-                #print("4:"+str(len(valid_label)))
+                
 
 #定义模型-网络模型
 def SegNet():
@@ -216,9 +199,6 @@ def SegNet():
     model.add(Conv2D(64, (3, 3), strides=(1, 1), padding='same', activation='relu'))  
     model.add(BatchNormalization())  
     model.add(Conv2D(n_label, (1, 1), strides=(1, 1), padding='same'))  
-    model.add(Reshape((img_w*img_h,n_label)))
-    #axis=1和axis=2互换位置，等同于np.swapaxes(layer,1,2)  
-    #model.add(Permute((2,1)))  
     model.add(Activation('softmax'))  
     model.compile(loss='categorical_crossentropy',optimizer='sgd',metrics=['accuracy'])  
     model.summary()  

@@ -12,7 +12,7 @@
 通过fit_generator运行，所以生成器需要自己编写，FCN8S与Segnet均为序列式模型与Keras的Model类有些不同，可以调用更多的方法。<br>
 展示一下Unet模型及FPN模型在此数据集上的结果，结果比Segnet与FCN好太多，所以就在这里不对比Segnet与FCN了。<br>
 
-其中Unet未经过预训练，其他集成的模块都经过了Imagenet预训练。
+其中Unet未经过预训练，其他集成的模块都经过了Imagenet预训练，并且测试都是通过划分数据来进行测试的，train75%，val25%。
 
 ### 准确率对比：
 ![ACC](https://github.com/1044197988/Semantic-segmentation-of-remote-sensing-images/blob/master/Image/Acc.png)
@@ -42,8 +42,11 @@
 ![3](https://github.com/1044197988/Semantic-segmentation-of-remote-sensing-images/blob/master/Unet%2B%2B结果/概要统计.png)
 ![4](https://github.com/1044197988/Semantic-segmentation-of-remote-sensing-images/blob/master/Unet%2B%2B结果/类别统计.png)
 
+## 结果图的拼接痕迹问题：
+我认为这个很大概率上跟模型的拟合能力、泛化能力有关，所以这个问题不用考虑，只要能够训练到所有的像素就可以了。
+Unet等相关模型预测的图，“拼接痕迹”很小。
 
 ## 代码运行：
 弄好数据集后，需要切割，切割的话这个可以参考一下生成数据并增强.py,更改相关参数即可<br>
 然后通过里面的Segnet的训练程序启动即可，需要修改参数。<br>
-这个只是序列式模型的预测与训练，主要还是看模型。
+这个Segnet、FCN8S是用序列式类来实现的模型，所以预测的话是跟Model类有一点不相同，就是可以调用predict_classes的方法。

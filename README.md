@@ -1,6 +1,7 @@
 # Semantic-segmentation-of-remote-sensing-image   <br>基于深度学习关于遥感影像的语义分割 
 首先看一下数据集，包含原始影像与标签，实际的分辨率很大，这个只是缩略图。<br>
-影像数据是Landsat8卫星的，用五四三波段进行合成，并利用GS方法进行全色第八波段的融合。<br>
+影像数据是Landsat8卫星的，用五四三波段进行合成，并利用GS方法进行全色第八波段的融合。(Envi软件处理)<br>
+标签是通过矢量图层以ArcGIS软件来处理生成的。<br>
 
 此代码库可在Tensorflow下keras环境运行，在Tensorflow1.12及Tensorflow2.0测试运行，代码更改后，更适合于Tensorflow2.0<br>
 

@@ -23,23 +23,9 @@
 ![Loss](https://github.com/1044197988/Semantic-segmentation-of-remote-sensing-images/blob/master/Image/Loss.png)
 
 ### 参数对比：
-模型		                权重大小  推理时间<br>
-FPN_EfficientNetB0      27.4MB    64.7s<br>
-Unet		                98.9MB    85.0s<br>
-Unet_EfficientNetB0	    39.1MB    59.4s<br>
-Unet_MobileNetV2        31.1MB    49.1s<br>
-
-在新测试的数据集中测试：<br>
-FPN_EfficientNetB0：<br>
-ACC        0.93015<br>
-F1         0.63689<br>
-Kappa      0.71132<br>
-
-Classes                              		0             1             2             3           4          5            <br> 
-ACC(Accuracy)                        		0.97664       0.83808       0.93909       0.90397     0.92532    0.99776       <br>
-interpretation      	                  Very Good     Very Good     Poor          Good        Good       Excellent  <br>
+![参数](https://github.com/1044197988/Semantic-segmentation-of-remote-sensing-images/blob/master/Image/dd.png)
 
 ## 代码运行：
-弄好数据集后，需要切割，切割的话这个可以参考一下生成数据并增强.py,更改相关参数即可
-然后通过里面的Segnet的训练程序启动即可，需要修改参数。
+弄好数据集后，需要切割，切割的话这个可以参考一下生成数据并增强.py,更改相关参数即可<br>
+然后通过里面的Segnet的训练程序启动即可，需要修改参数。<br>
 这个只是序列式模型的预测与训练，主要还是看模型。

@@ -56,6 +56,22 @@ Model类文件里提供了使用Model类的模型的预测方法。<br>
 ## CRF后处理:
 模型预测完毕后，可以使用CRF进行后处理，CRF.py文件提供了相关代码参考，但未必保证结果可靠。
 
+### GDAL
+如果自己做的图包含多个波段(往往大于4个)，Opencv或PIL就不太顶用了，这时候GDAL就派上用场了
+```python
+from osgeo import gdal
+import numpy as np
+
+def load_img(path):
+    dataset = gdal.Open(path)
+    im_width = dataset.RasterXSize
+    im_height = dataset.RasterYSize
+    im_data = dataset.ReadAsArray(0,0,im_width,im_height)
+    im_data = im_data.transpose((1,2,0)) #此步保证矩阵为channel_last模式
+    return im_data
+```
+<br>例如我有一个十波段图像，用此函数读取后为numpy数组类,shape为[size,size,10]
+
 # 提示
 我的该贡献库中，提供了一些分割的模型及相关指标与损失的代码<br>
 [1044197988-TF.Keras-Commonly-used-models](https://github.com/1044197988/TF.Keras-Commonly-used-models)

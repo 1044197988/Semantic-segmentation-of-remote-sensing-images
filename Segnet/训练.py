@@ -17,8 +17,6 @@ import random
 import os
 from tqdm import tqdm
 
-#设置使用GPU
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 seed = 7  
 np.random.seed(seed)  
   

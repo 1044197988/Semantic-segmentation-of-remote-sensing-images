@@ -49,7 +49,6 @@ def predict(args):
         padding_img[0:h,0:w,:] = image[:,:,:]
         padding_img = padding_img.astype("float") / 255.0
         padding_img = img_to_array(padding_img)
-        #print('src:',padding_img.shape)
         mask_whole = np.zeros((padding_h,padding_w),dtype=np.uint8)
         for i in range(padding_h//stride):
             for j in range(padding_w//stride):
@@ -59,26 +58,14 @@ def predict(args):
                 if ch != 32 or cw != 32:
                     print('尺寸不正确,请检查!')
                     continue
-                    
                 crop = np.expand_dims(crop, axis=0) 
                 pred = model.predict(crop,verbose=2)
-                #print(pred)
-                #print (np.unique(pred))
-                #print ('pred:',pred.shape)
                 pred=np.argmax(pred,axis=3)
                 pred=pred.flatten()
-                #print(pred)
-                #print('pred:',pred.shape)
-                #print(pred[0].shape)
-                #print(pred[1].shape)
                 pred = labelencoder.inverse_transform(pred)
-                #print(pred)
-                #print('pred:',pred.shape)
                 pred = pred.reshape((32,32)).astype(np.uint8)
-                #print ('pred:',pred.shape)
                 mask_whole[i*stride:i*stride+image_size,j*stride:j*stride+image_size] = pred[:,:]
 
-        
         cv2.imwrite(basePath+'predict/'+path,mask_whole[0:h,0:w])
         
     

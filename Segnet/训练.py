@@ -83,7 +83,7 @@ def generateData(batch_size,data=[]):
                 train_label = np.array(train_label).flatten()      #拍平
                 train_label = labelencoder.transform(train_label)  
                 train_label = to_categorical(train_label, num_classes=n_label)  #编码输出便签
-                train_label = train_label.reshape((batch_size,img_w * img_h,n_label))
+                train_label = train_label.reshape((batch_size,img_w,img_h,n_label))
                 yield (train_data,train_label)  
                 train_data = []  
                 train_label = []  
@@ -112,7 +112,7 @@ def generateValidData(batch_size,data=[]):
                 valid_label = np.array(valid_label).flatten()  
                 valid_label = labelencoder.transform(valid_label)  
                 valid_label = to_categorical(valid_label, num_classes=n_label)
-                valid_label = valid_label.reshape((batch_size,img_w * img_h,n_label))
+                valid_label = valid_label.reshape((batch_size,img_w,img_h,n_label))
                 yield (valid_data,valid_label)  
                 valid_data = []  
                 valid_label = []  
@@ -213,8 +213,8 @@ def train(args):
     valid_numb = len(val_set)  
     print ("the number of train data is",train_numb)  
     print ("the number of val data is",valid_numb)
-    H = model.fit_generator(generator=generateData(BS,train_set),steps_per_epoch=(train_numb//BS),epochs=EPOCHS,verbose=2,
-                    validation_data=generateValidData(BS,val_set),validation_steps=(valid_numb//BS),callbacks=callable,max_queue_size=1)
+    H = model.fit(x=generateData(BS,train_set),steps_per_epoch=(train_numb//BS),epochs=EPOCHS,verbose=2,
+                    validation_data=generateValidData(BS,val_set),validation_steps=(valid_numb//BS),callbacks=callable)
 
     # plot the training loss and accuracy
     plt.style.use("ggplot")
